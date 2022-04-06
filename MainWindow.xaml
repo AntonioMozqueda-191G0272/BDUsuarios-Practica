@@ -1,0 +1,37 @@
+﻿<Window x:Class="BDUsuarios_Practica.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BDUsuarios_Practica" 
+        xmlns:viewmodels="clr-namespace:BDUsuarios_Practica.ViewModels"
+        mc:Ignorable="d"
+        Title="Inicio de Sesión" Height="300" Width="390">
+    <Window.DataContext>
+        <viewmodels:UserViewModel></viewmodels:UserViewModel>
+    </Window.DataContext>
+
+    <DockPanel>
+        <WrapPanel DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="35,10,0,0">
+            <Image DockPanel.Dock="Top" Source="/Assets/Outlook-Simbolo.png" Height="50" Width="50"></Image>
+            <Label DockPanel.Dock="Top" Style="{StaticResource EstiloTitulo}">Outlook</Label>
+        </WrapPanel>
+
+        <TextBlock DockPanel.Dock="Bottom" Text="{Binding Error}" Foreground="Red" 
+                   HorizontalAlignment="Center" Margin="0,0,0,8"></TextBlock>
+
+        <StackPanel DockPanel.Dock="Bottom" Margin="10,5,10,15" HorizontalAlignment="Center">
+            <Label Style="{StaticResource EstiloTexto}">Correo:</Label>
+            <TextBox Style="{StaticResource EstiloTextBox}"></TextBox>
+            <Label Style="{StaticResource EstiloTexto}">Contraseña:</Label>
+            <TextBox x:Name="txtPassword" Style="{StaticResource EstiloTextBox}" Text="{Binding Contraseña}"
+                     Visibility="Collapsed"></TextBox>
+            <PasswordBox x:Name="PSW1" LostFocus="PSW1_LostFocus" Style="{StaticResource EstiloPasswordBox}"></PasswordBox>
+            <WrapPanel HorizontalAlignment="Center" Margin="4">
+                <Button Style="{StaticResource EstiloBoton}">Iniciar Sesión</Button>
+                <Button Style="{StaticResource EstiloBoton}" Command="{Binding verRegistrarCommand}">Registrar Usuario</Button>
+                <Button Style="{StaticResource EstiloBoton}" >Administrar...</Button>
+            </WrapPanel>
+        </StackPanel>
+    </DockPanel>
+</Window>

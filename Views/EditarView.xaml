@@ -1,0 +1,28 @@
+﻿<Window x:Class="BDUsuarios_Practica.Views.EditarView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BDUsuarios_Practica.Views"
+        mc:Ignorable="d"
+        Title="Editar Usuario" Height="450" Width="400">
+    
+    <StackPanel Margin="5">
+        <Label Margin="5" HorizontalAlignment="Center">Editar Usuario</Label>
+        <TextBlock>Correo Electrónico</TextBlock>
+        <TextBox></TextBox>
+        <TextBlock>Nombre</TextBlock>
+        <TextBox></TextBox>
+        <TextBlock>Dirección</TextBlock>
+        <TextBox></TextBox>
+        <TextBlock>Telefono</TextBlock>
+        <TextBox></TextBox>
+        <TextBlock>Contraseña</TextBlock>
+        <TextBox></TextBox>
+        <WrapPanel Margin="10" HorizontalAlignment="Center">
+            <Button Style="{StaticResource EstiloBoton}" Content="Guardar..."></Button>
+            <Button Style="{StaticResource EstiloBoton}" Content="Cancelar"></Button>
+        </WrapPanel>
+        <TextBlock x:Name="TextoError"></TextBlock>
+    </StackPanel>
+</Window>
