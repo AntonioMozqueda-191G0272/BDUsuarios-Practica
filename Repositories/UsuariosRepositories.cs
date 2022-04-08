@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using BDUsuarios_Practica.Models;
@@ -11,7 +12,6 @@ namespace BDUsuarios_Practica.Repositories
     public class UsuariosRepositories
     {
         usuariosContext context = new usuariosContext();
-        Usuario u = new Usuario();
         public IEnumerable<Usuario> GetAll() 
         {
             return context.Usuarios.OrderBy(x => x.Nombre);
@@ -26,23 +26,30 @@ namespace BDUsuarios_Practica.Repositories
         {
             context.Database.ExecuteSqlRaw($"call sp_RegistrarUsuario" + $"('{u.EMail}','{u.Nombre}','{u.Direccion}','{u.Telefono}'," +
                 $"'{u.Contraseña}')");
-            
         }
-
+        public static String GetMD5Hash(string input)
+        {
+            MD5CryptoServiceProvider x = new MD5CryptoServiceProvider();
+            byte[] bs = System.Text.Encoding.UTF8.GetBytes(input);
+            bs = x.ComputeHash(bs);
+            StringBuilder s = new StringBuilder();
+            foreach (byte b in bs)
+            {
+                s.Append(b.ToString("x2").ToLower());
+            }
+            string hash = s.ToString();
+            return hash;
+        }
 
         public void Update(Usuario u)
         {
-            Usuario clonuser = context.Usuarios.FirstOrDefault(x => x.Id == u.Id);
-
-            if (clonuser != null)
+            if (string.IsNullOrEmpty(u.Nombre))
             {
-                clonuser.Id = u.Id;
-                clonuser.Nombre = u.Nombre;
-                clonuser.Direccion = u.Direccion;
-                clonuser.Telefono = u.Telefono;
-                clonuser.Contraseña = u.Contraseña;
-
-                context.SaveChanges();
+                throw new ArgumentException("Por favor seleccione un registro para editarlo");
+            }
+            else
+            {
+                context.Database.ExecuteSqlRaw($"call sp_Modificacion('{u.Id}','{u.EMail}','{u.Nombre}','{u.Direccion}','{u.Telefono}','{u.Contraseña}')");
             }
         }
 

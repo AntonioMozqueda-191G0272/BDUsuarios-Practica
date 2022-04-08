@@ -32,7 +32,6 @@ namespace BDUsuarios_Practica.Repositories
         {
             context.Database.ExecuteSqlRaw($"call sp_Login" +
                 $"('{u.EMail}','{u.Contraseña}')");
-            context.SaveChanges();
         }
 
         //Valida existencia de usuario

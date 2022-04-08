@@ -1,0 +1,39 @@
+﻿<Window x:Class="BDUsuarios_Practica.Views.LoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BDUsuarios_Practica.Views"
+        xmlns:viewmodels="clr-namespace:BDUsuarios_Practica.ViewModels"
+        mc:Ignorable="d"
+        Title="Inicio de Sesión" Height="310" Width="320">
+    <Window.DataContext>
+        <viewmodels:UserViewModel></viewmodels:UserViewModel>
+    </Window.DataContext>
+
+    <DockPanel>
+        <WrapPanel DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="35,10,0,0">
+            <Image DockPanel.Dock="Top" Source="/Assets/Outlook-Simbolo.png" Height="50" Width="50"></Image>
+            <Label DockPanel.Dock="Top" Style="{StaticResource EstiloTitulo}">Outlook</Label>
+        </WrapPanel>
+
+        <TextBlock DockPanel.Dock="Bottom" Text="{Binding Error}"
+                   Style="{StaticResource TextoError}"></TextBlock>
+
+        <StackPanel DockPanel.Dock="Bottom" Margin="10,5,10,15" HorizontalAlignment="Center">
+
+            <Label Style="{StaticResource EstiloTexto}">Correo:</Label>
+            <TextBox Style="{StaticResource EstiloTextBox}" Text="{Binding Usuario.EMail}"></TextBox>
+
+            <Label Style="{StaticResource EstiloTexto}">Contraseña:</Label>
+            <TextBox Style="{StaticResource EstiloTextBox}" 
+                     Text="{Binding Usuario.Contraseña}"></TextBox>
+
+            <WrapPanel HorizontalAlignment="Center" Margin="4">
+                <Button Style="{StaticResource EstiloBoton}" Command="{Binding LoginCommand}">Iniciar Sesión</Button>
+                <Button Style="{StaticResource EstiloBoton}" Command="{Binding verRegistrarCommand}">Registrar Usuario</Button>
+            </WrapPanel>
+
+        </StackPanel>
+    </DockPanel>
+</Window>

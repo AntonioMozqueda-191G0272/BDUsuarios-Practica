@@ -59,6 +59,7 @@ namespace BDUsuarios_Practica.ViewModels
         public ICommand EditarCommand { get; set; } //Editar Usuario
         public ICommand LoginCommand { get; set; }  //Iniciar sesion
         public ICommand VerAdministrarCommand { get; set; } //Abre la ventana Administrar
+        public ICommand CerrarSesionCommand { get; set; }   //Cierra ventana Administrar
 
         RegistrarUsuarioView RegistrarDialog = new RegistrarUsuarioView();
         EditarView EditarDialog = new EditarView();
@@ -75,6 +76,33 @@ namespace BDUsuarios_Practica.ViewModels
             RegistrarDialog.ShowDialog();
         }
 
+        public void verEditar(Usuario u)
+        {
+            u = reposUser.GetByEMail(u);
+            Error = "";
+            if (u != null)
+            {
+                Usuario copia = new Usuario()
+                {
+                    EMail = u.EMail,
+                    Nombre = u.Nombre,
+                    Direccion = u.Direccion,
+                    Telefono = u.Telefono,
+                    Contraseña = null,
+                    Id = u.Id
+                };
+                usuario = copia;
+                EditarDialog = new EditarView();
+                EditarDialog.DataContext = this;
+                EditarDialog.ShowDialog();
+            }
+        }
+        private void CerrarAdministrar()
+        {
+            error = "";
+            AdminDialog = new AdministrarView();
+            AdminDialog.Close();
+        }
 
         //LLAMADA METODOS
         //Registrar
@@ -108,8 +136,8 @@ namespace BDUsuarios_Practica.ViewModels
                     
                     AdminDialog = new AdministrarView();
                     AdminDialog.DataContext = this;
-                    AdminDialog.ShowDialog();
                     reposlogin.login(Usuario);
+                    AdminDialog.ShowDialog();
                 }
             }
             catch (Exception ex)
@@ -118,13 +146,36 @@ namespace BDUsuarios_Practica.ViewModels
                 Error = ex.Message;
             }
         }
-        
+
+        public void ModificacionDatos()
+        {
+            Error = "";
+            try
+            {
+                if (reposUser.Validate(usuario))
+                {
+                    reposUser.Update(usuario);
+                    EditarDialog.Close();
+                    Error = "";
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Error = ex.Message;
+            }
+        }
+
         //CONSTRUCTOR
         public UserViewModel()
         {
             verRegistrarCommand = new RelayCommand(verRegistrar);
             RegistrarUsuarioCommand = new RelayCommand(RegistrarUsuario);
             LoginCommand = new RelayCommand(Iniciar);
+            Usuario = new Usuario();
+            verEditarCommand = new RelayCommand<Usuario>(verEditar);
+            EditarCommand = new RelayCommand(ModificacionDatos);
+            CerrarSesionCommand = new RelayCommand(CerrarAdministrar);
         }
     }
 }

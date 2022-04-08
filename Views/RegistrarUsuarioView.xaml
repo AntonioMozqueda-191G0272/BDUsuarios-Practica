@@ -31,7 +31,7 @@
 
             <WrapPanel Margin="5" HorizontalAlignment="Center">
                 <Button Style="{StaticResource EstiloBoton}" Content="Registrar Usuario" Command="{Binding RegistrarUsuarioCommand}"/>
-                <Button Style="{StaticResource EstiloBoton}" Content="Cancelar"/>
+                <Button Style="{StaticResource EstiloBoton}" Content="Cancelar" IsCancel="True"/>
             </WrapPanel>
         </StackPanel>
     </DockPanel>

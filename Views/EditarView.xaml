@@ -14,20 +14,24 @@
             <Label DockPanel.Dock="Top" Style="{StaticResource EstiloTitulo}">Editar</Label>
         </WrapPanel>
 
-        <TextBlock Style="{DynamicResource EstiloTextoTextbloc}" Text="{Binding }">Correo Electrónico</TextBlock>
-        <TextBox Style="{DynamicResource EstiloTextBox}"></TextBox>
+        <TextBlock Style="{DynamicResource EstiloTextoTextbloc}">Correo Electrónico</TextBlock>
+        <TextBox Style="{DynamicResource EstiloTextBox}" IsReadOnly="True" Text="{Binding Usuario.EMail}"></TextBox>
+        
         <TextBlock Style="{DynamicResource EstiloTextoTextbloc}">Nombre</TextBlock>
-        <TextBox Style="{DynamicResource EstiloTextBox}"></TextBox>
+        <TextBox Style="{DynamicResource EstiloTextBox}" Text="{Binding Usuario.Nombre}"></TextBox>
+        
         <TextBlock Style="{DynamicResource EstiloTextoTextbloc}">Dirección</TextBlock>
-        <TextBox Style='{DynamicResource EstiloTextBox}'></TextBox>
+        <TextBox Style="{DynamicResource EstiloTextBox}" Text="{Binding Usuario.Direccion}"></TextBox>
+        
         <TextBlock Style="{DynamicResource EstiloTextoTextbloc}">Telefono</TextBlock>
-        <TextBox Style="{DynamicResource EstiloTextBox}"></TextBox>
+        <TextBox Style="{DynamicResource EstiloTextBox}" Text="{Binding Usuario.Telefono}"></TextBox>
+
         <TextBlock Style="{DynamicResource EstiloTextoTextbloc}">Contraseña</TextBlock>
-        <TextBox Style="{DynamicResource EstiloTextBox}"></TextBox>
+        <TextBox Style="{DynamicResource EstiloTextBox}" Text="{Binding Usuario.Contraseña}"></TextBox>
 
         <WrapPanel Margin="10" HorizontalAlignment="Center">
-            <Button Style="{StaticResource EstiloBoton}" Content="Guardar..."></Button>
-            <Button Style="{StaticResource EstiloBoton}" Content="Cancelar"></Button>
+            <Button Style="{StaticResource EstiloBoton}" Content="Guardar..." Command="{Binding EditarCommand}"></Button>
+            <Button Style="{StaticResource EstiloBoton}" Content="Cancelar" IsCancel="True"></Button>
         </WrapPanel>
 
         <TextBlock x:Name="TextoError" Style="{StaticResource TextoError}"></TextBlock>
