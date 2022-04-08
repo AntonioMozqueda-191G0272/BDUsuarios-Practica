@@ -24,10 +24,5 @@ namespace BDUsuarios_Practica
         {
             InitializeComponent();
         }
-
-        private void PSW1_LostFocus(object sender, RoutedEventArgs e)
-        {
-            txtPassword.Text = PSW1.Password;
-        }
     }
 }

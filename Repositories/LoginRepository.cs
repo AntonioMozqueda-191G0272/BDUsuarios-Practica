@@ -27,14 +27,18 @@ namespace BDUsuarios_Practica.Repositories
 
         usuariosContext context = new usuariosContext();
 
+        //Metodo para logear
         public void login(Usuario u)
         {
-            context.Database.ExecuteSqlRaw("$call sp_Login" + $"('{u.EMail}','{u.Contraseña}'");
+            context.Database.ExecuteSqlRaw($"call sp_Login" +
+                $"('{u.EMail}','{u.Contraseña}')");
+            context.SaveChanges();
         }
 
+        //Valida existencia de usuario
         public bool ValidateLogin(Usuario u)
         {
-            if (context.Usuarios.Any(x => x.EMail == u.EMail && x.Contraseña == GetMD5Hash(u.Contraseña)))
+            if (!context.Usuarios.Any(x => x.EMail == u.EMail && x.Contraseña == GetMD5Hash(u.Contraseña)))
             {
                 throw new ArgumentException("Usuario o contraseña incorrectos");
             }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BDUsuarios_Practica.Views"
         mc:Ignorable="d"
-        Title="Administración" Height="200" Width="350">
+        Title="Administración" Height="160" Width="200">
     
     <DockPanel>
         <WrapPanel DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="0,10,0,0">

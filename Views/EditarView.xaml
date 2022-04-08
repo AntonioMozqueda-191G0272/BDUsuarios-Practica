@@ -5,24 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BDUsuarios_Practica.Views"
         mc:Ignorable="d"
-        Title="Editar Usuario" Height="450" Width="400">
-    
-    <StackPanel Margin="5">
-        <Label Margin="5" HorizontalAlignment="Center">Editar Usuario</Label>
-        <TextBlock>Correo Electrónico</TextBlock>
-        <TextBox></TextBox>
-        <TextBlock>Nombre</TextBlock>
-        <TextBox></TextBox>
-        <TextBlock>Dirección</TextBlock>
-        <TextBox></TextBox>
-        <TextBlock>Telefono</TextBlock>
-        <TextBox></TextBox>
-        <TextBlock>Contraseña</TextBlock>
-        <TextBox></TextBox>
+        Title="Editar Usuario" Height="400" Width="300">
+
+    <StackPanel Margin="5" HorizontalAlignment="Center">
+        
+        <WrapPanel DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="0,10,0,0">
+            <Image DockPanel.Dock="Top" Source="/Assets/Outlook-Simbolo.png" Height="50" Width="50"></Image>
+            <Label DockPanel.Dock="Top" Style="{StaticResource EstiloTitulo}">Editar</Label>
+        </WrapPanel>
+
+        <TextBlock Style="{DynamicResource EstiloTextoTextbloc}" Text="{Binding }">Correo Electrónico</TextBlock>
+        <TextBox Style="{DynamicResource EstiloTextBox}"></TextBox>
+        <TextBlock Style="{DynamicResource EstiloTextoTextbloc}">Nombre</TextBlock>
+        <TextBox Style="{DynamicResource EstiloTextBox}"></TextBox>
+        <TextBlock Style="{DynamicResource EstiloTextoTextbloc}">Dirección</TextBlock>
+        <TextBox Style='{DynamicResource EstiloTextBox}'></TextBox>
+        <TextBlock Style="{DynamicResource EstiloTextoTextbloc}">Telefono</TextBlock>
+        <TextBox Style="{DynamicResource EstiloTextBox}"></TextBox>
+        <TextBlock Style="{DynamicResource EstiloTextoTextbloc}">Contraseña</TextBlock>
+        <TextBox Style="{DynamicResource EstiloTextBox}"></TextBox>
+
         <WrapPanel Margin="10" HorizontalAlignment="Center">
             <Button Style="{StaticResource EstiloBoton}" Content="Guardar..."></Button>
             <Button Style="{StaticResource EstiloBoton}" Content="Cancelar"></Button>
         </WrapPanel>
-        <TextBlock x:Name="TextoError"></TextBlock>
+
+        <TextBlock x:Name="TextoError" Style="{StaticResource TextoError}"></TextBlock>
+        
     </StackPanel>
 </Window>

@@ -15,14 +15,32 @@ namespace BDUsuarios_Practica.ViewModels
     public class UserViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private Usuario us;
-        public Usuario US
+        private Usuario usuario;
+        public Usuario Usuario
         {
-            get { return us; }
-            set { us = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("US"));
+            get { return usuario; }
+            set { usuario = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Usuario"));
             }
         }
+
+        private string correo;
+        public string Correo
+        {
+            get { return correo; }
+            set { correo = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Correo"));
+            }
+        }
+        private string contraseña;
+        public string Contraseña
+        {
+            get { return contraseña; }
+            set { contraseña = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Contraseña"));
+            }
+        }
+
         private string error;
         public string Error
         {
@@ -31,6 +49,7 @@ namespace BDUsuarios_Practica.ViewModels
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Error"));
             }
         }
+
         UsuariosRepositories reposUser = new UsuariosRepositories();
         LoginRepository reposlogin = new LoginRepository();
 
@@ -41,9 +60,9 @@ namespace BDUsuarios_Practica.ViewModels
         public ICommand LoginCommand { get; set; }  //Iniciar sesion
         public ICommand VerAdministrarCommand { get; set; } //Abre la ventana Administrar
 
-        RegistrarUsuarioView RegistrarDialog;
-        EditarView EditarDialog;
-        AdministrarView AdminDialog;
+        RegistrarUsuarioView RegistrarDialog = new RegistrarUsuarioView();
+        EditarView EditarDialog = new EditarView();
+        AdministrarView AdminDialog = new AdministrarView();
 
         //LLAMADA VIEWS
         //ventana registrar
@@ -52,17 +71,11 @@ namespace BDUsuarios_Practica.ViewModels
             Error = "";
             RegistrarDialog = new RegistrarUsuarioView();
             RegistrarDialog.DataContext = this;
-            US = new Usuario();
+            Usuario = new Usuario();
             RegistrarDialog.ShowDialog();
         }
-        public void verAdministrar() 
-        {
-            Error = "";
-            AdminDialog = new AdministrarView();
-            AdminDialog.DataContext = this;
-            US = new Usuario();
-            AdminDialog.ShowDialog();
-        }
+
+
         //LLAMADA METODOS
         //Registrar
         private void RegistrarUsuario()
@@ -70,9 +83,9 @@ namespace BDUsuarios_Practica.ViewModels
             Error = "";
             try
             {
-                if (reposUser.Validate(us))
+                if (reposUser.Validate(Usuario))
                 {
-                    reposUser.Registrar(us);
+                    reposUser.Registrar(Usuario);
                     RegistrarDialog.Close();
                 }
             }
@@ -83,15 +96,20 @@ namespace BDUsuarios_Practica.ViewModels
             }
 
         }
+
         //Iniciar o login
         private void Iniciar()
         {
             Error = "";
             try
             {
-                if (reposlogin.ValidateLogin(US))
+                if (reposlogin.ValidateLogin(Usuario) == true)
                 {
-                    reposlogin.login(US);
+                    
+                    AdminDialog = new AdministrarView();
+                    AdminDialog.DataContext = this;
+                    AdminDialog.ShowDialog();
+                    reposlogin.login(Usuario);
                 }
             }
             catch (Exception ex)

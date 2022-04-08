@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BDUsuarios_Practica.Views" 
         mc:Ignorable="d"
-        Title="RegistrarUsuarioView" Height="400" Width="400">
+        Title="RegistrarUsuarioView" Height="420" Width="300">
 
     <DockPanel>
         
@@ -14,22 +14,25 @@
             <Label DockPanel.Dock="Top" Style="{StaticResource EstiloTitulo}">Outlook</Label>
         </WrapPanel>
         
+        <TextBlock DockPanel.Dock="Bottom" x:Name="TextoError" Text="{Binding Error}"
+                       Style="{StaticResource TextoError}"></TextBlock>
+
         <StackPanel Margin="5" HorizontalAlignment="Center">
             <TextBlock Style="{StaticResource EstiloTextoTextbloc}">Correo Electrónico</TextBlock>
-            <TextBox Text="{Binding US.EMail}" Style="{StaticResource EstiloTextBox}"></TextBox>
-            <TextBlock>Nombre</TextBlock>
-            <TextBox Text="{Binding US.Nombre}" Style="{StaticResource EstiloTextBox}"></TextBox>
-            <TextBlock>Dirección</TextBlock>
-            <TextBox Text="{Binding US.Direccion}" Style="{StaticResource EstiloTextBox}"></TextBox>
-            <TextBlock>Telefono</TextBlock>
-            <TextBox Text="{Binding US.Telefono}" Style="{StaticResource EstiloTextBox}"></TextBox>
-            <TextBlock>Contraseña</TextBlock>
-            <TextBox Text="{Binding US.Contraseña}" Style="{StaticResource EstiloTextBox}"></TextBox>
-            <WrapPanel Margin="10" HorizontalAlignment="Center">
+            <TextBox Text="{Binding Usuario.EMail}" Style="{StaticResource EstiloTextBox}"></TextBox>
+            <TextBlock Style="{DynamicResource EstiloTextoTextbloc}">Nombre</TextBlock>
+            <TextBox Text="{Binding Usuario.Nombre}" Style="{StaticResource EstiloTextBox}"></TextBox>
+            <TextBlock Style="{DynamicResource EstiloTextoTextbloc}">Dirección</TextBlock>
+            <TextBox Text="{Binding Usuario.Direccion}" Style="{StaticResource EstiloTextBox}"></TextBox>
+            <TextBlock Style="{DynamicResource EstiloTextoTextbloc}">Telefono</TextBlock>
+            <TextBox Text="{Binding Usuario.Telefono}" Style="{StaticResource EstiloTextBox}"></TextBox>
+            <TextBlock Style="{DynamicResource EstiloTextoTextbloc}">Contraseña</TextBlock>
+            <TextBox Text="{Binding Usuario.Contraseña}" Style="{StaticResource EstiloTextBox}"></TextBox>
+
+            <WrapPanel Margin="5" HorizontalAlignment="Center">
                 <Button Style="{StaticResource EstiloBoton}" Content="Registrar Usuario" Command="{Binding RegistrarUsuarioCommand}"/>
                 <Button Style="{StaticResource EstiloBoton}" Content="Cancelar"/>
             </WrapPanel>
-            <TextBlock x:Name="TextoError" Text="{Binding Error}"></TextBlock>
         </StackPanel>
     </DockPanel>
 </Window>
